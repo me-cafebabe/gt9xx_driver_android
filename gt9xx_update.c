@@ -273,7 +273,7 @@ s32 gup_enter_update_mode(struct i2c_client *client)
 		dev_err(&ts->client->dev, "update failed, no rst pin\n");
 		return FAIL;
 	}
-	gpio_direction_output(ts->pdata->rst_gpio, 0);
+	gtp_rst_output(ts, 0);
 	usleep_range(2000, 3000);
 
 	/* step2:select I2C slave addr,INT:0--0xBA;1--0x28. */
@@ -281,7 +281,7 @@ s32 gup_enter_update_mode(struct i2c_client *client)
 	usleep_range(2000, 3000);
 
 	/* step3:RST output high reset guitar */
-	gpio_direction_output(ts->pdata->rst_gpio, 1);
+	gtp_rst_output(ts, 1);
 
 	/* 20121211 modify start */
 	usleep_range(5000, 6000);
